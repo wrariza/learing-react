@@ -14,17 +14,16 @@
 
 	<script type="text/babel">
 
+		//Componentes de ui o puros
 		function Hello(props){
-			const name = props.name;
-
 			return(
-				<h1 id='Title'>
-					Hello {name}
+				<h1 id='Title' onClick={props.onClick}>
+					Hello {props.name} {props.count}
 				</h1>
 			);
 		}
 
-
+		//Componentes contonedores
 		class MiComponente extends React.Component {
 			constructor(props) {
 				super(props)
@@ -44,44 +43,19 @@
        }
 
 			 render(){
-				  const name = this.props.name;
-
-					return (
-						 <h1 id="Title" onClick={this.handleClick}>
-								Hello {name} {this.state.count}
-						 </h1>
-					)
-			 }
+ 				 return (
+ 						<Hello
+ 						 name={this.props.name}
+ 						 count={this.state.count}
+ 						 onClick={this.handleClick}
+ 						/>
+ 				 );
+ 			}
 		}
 
-		const OtroComponente = React.createClass({
-
-			getInitialState() {
-         return {
-					 count: 0,
-				 }
-			},
-
-			handleClick() {
-				this.setState({
-					count: this.state.count + 1,
-				});
-			},
-
-			render(){
-				 const name = this.props.name;
-
-				 return (
-						<h1 id="Title" onClick={this.handleClick}>
-							 Hello {name} {this.state.count}
-						</h1>
-				 )
-			}
-
-		})
 
 		ReactDOM.render(
-			<OtroComponente  name="World"/>,
+			<MiComponente  name="World"/>,
 			document.getElementById('app')
 		);
 
