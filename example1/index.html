@@ -8,8 +8,6 @@
 
 	<div id="app"></div>
 
-
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
@@ -27,20 +25,39 @@
 		}
 
 
+		class MiComponente extends React.Component {
+			constructor(props) {
+				super(props)
+
+					 this.state = {
+						  count: 0
+					 };
+
+					 this.handleClick = this.handleClick.bind(this);
+
+			 }
+
+			 handleClick() {
+         this.setState({
+           count: this.state.count + 1,
+         });
+       }
+
+			 render(){
+				  const name = this.props.name;
+
+					return (
+						 <h1 id="Title" onClick={this.handleClick}>
+								Hello {name} {this.state.count}
+						 </h1>
+					)
+			 }
+		}
+
 		ReactDOM.render(
-			<Hello  name="World"/>,
+			<MiComponente  name="World"/>,
 			document.getElementById('app')
 		);
-
-		setTimeout(
-	      () => {
-	        ReactDOM.render(
-	          <Hello  name="World !!!"/>,
-	          document.getElementById('app')
-	        );
-	      },
-	      1000
-   		 );
 
 
 	</script>
