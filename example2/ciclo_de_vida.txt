@@ -1,0 +1,37 @@
+Ciclo de vida de un componente
+
+Montado 
+cuando se pone en la ui
+
+constructor(props) inicializar el estado bind de eventos
+componentWillMount() no esta un renderizado no hacer peticiones en este memtodo
+render()
+ComponentDidMount() Ya existe en el dom
+
+
+Actualizacion
+
+componentWillReceiveProps(nexProps) se ejecuta antes de actualizar el componente 
+
+
+shoulComponentUpdate(nexProps, nexState)
+devuelve true o false 
+todos devuelven por defecto true execto pureComponent
+
+ComponentWillUpdate(nexProps, nextState)
+Una vez actualizado se puede hacer algo
+
+render()
+
+
+coponenDidUpdate(prevProps, prevstate)
+Volver a iniciar un mapa
+
+
+
+cuando ya esta en la ui y se actualiza datos
+
+Desmondado
+componentWillUnmount()
+
+borrar un mapa
