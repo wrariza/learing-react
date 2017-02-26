@@ -15,15 +15,21 @@
 	<script type="text/babel">
 
 		//Componentes de ui o puros
-		function Hello(props){
+		function Hello(props, context){
+			console.log(context)
 			return(
 				<h1 id='Title' onClick={props.onClick}>
-					Hello {props.name} {props.count}
+					Hello {props.name} {context.count}
 				</h1>
 			);
 		}
 
-		//Componentes contonedores o de estado
+    Hello.contextTypes = {
+      count: React.PropTypes.number
+    };
+
+
+		//Componentes contonedores
 		class MiComponente extends React.Component {
 			constructor(props) {
 				super(props)
@@ -36,40 +42,22 @@
 
 			 }
 
-			 componentWillMount(){
-				 console.log("El componente se va montar")
-			 }
-
-			 componentDidMount(){
-				 console.log("El componente se va montar")
-			 	 document.addEventListener('click',this.handleClick)
-			 }
-
-			 componentWillReceiveProps(nexProps){
-				  this.setState({
-							count: this.state.count * 2
-					})
-			 }
-
-			 shoulComponentUpdate(nexProps, nexState){
-				 if(nexProps.count !== nexState.count) return true
-				 false
-			 }
-
-			 coponenDidUpdate(prevProps, prevstate){
-				 console.log("El componente se actualizo")
-			 }
-
-			 componentWillUnmount(){
-				 console.log("El componente se desmonto")
-				 document.removeEventListener('click'. this.handleClick)
-			 }
-
 			 handleClick() {
          this.setState({
            count: this.state.count + 1,
          });
        }
+
+			 componentWillMount(){
+				 this.getChildrenContext()
+			 }
+
+			 getChildrenContext(){
+				  console.log("getChildrenContext")
+					return {
+						count: this.state.count,
+					};
+			 }
 
 			 render(){
  				 return (
@@ -82,6 +70,10 @@
  			}
 		}
 
+
+    MiComponente.childContextTypes = {
+      count: React.PropTypes.number,
+    };
 
 		ReactDOM.render(
 			<MiComponente  name="World"/>,
